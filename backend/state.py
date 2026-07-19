@@ -5,10 +5,13 @@ from collections import deque
 import copy
 from models import VenueSnapshot
 
+
 class VenueState:
     def __init__(self):
         self.snapshot: VenueSnapshot | None = None
-        self.history = deque(maxlen=60) # Keep last 60 readings (~5 mins if 5s intervals)
+        self.history = deque(
+            maxlen=60
+        )  # Keep last 60 readings (~5 mins if 5s intervals)
         self.active_connections: List[WebSocket] = []
         self.lock = asyncio.Lock()
 
@@ -32,20 +35,21 @@ class VenueState:
     async def broadcast(self):
         if not self.snapshot:
             return
-        
+
         # Serialize the state
         data = self.snapshot.model_dump_json()
-        
+
         # We need a copy of connections to avoid issues if a disconnect happens during broadcast
         async with self.lock:
             connections = list(self.active_connections)
-            
+
         for connection in connections:
             try:
                 await connection.send_text(data)
             except Exception:
                 # If sending fails, we can assume the connection is dead
                 await self.disconnect(connection)
+
 
 # Global singleton state
 venue_state = VenueState()

@@ -11,12 +11,14 @@ ALGORITHM = "HS256"
 
 security = HTTPBearer()
 
+
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     to_encode = data.copy()
     expire = datetime.utcnow() + (expires_delta or timedelta(hours=8))
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, JWT_SECRET, algorithm=ALGORITHM)
     return encoded_jwt
+
 
 def get_current_user(credentials: HTTPAuthorizationCredentials = Security(security)):
     token = credentials.credentials
@@ -29,9 +31,11 @@ def get_current_user(credentials: HTTPAuthorizationCredentials = Security(securi
     except jwt.PyJWTError:
         raise HTTPException(status_code=403, detail="Could not validate credentials")
 
+
 def require_role(allowed_roles: list[str]):
     def role_checker(user: dict = Security(get_current_user)):
         if user.get("role") not in allowed_roles:
             raise HTTPException(status_code=403, detail="Insufficient permissions")
         return user
+
     return role_checker
