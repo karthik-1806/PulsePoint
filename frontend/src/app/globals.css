@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Accessibility overrides */
+.high-contrast {
+  /* Force high contrast colors across standard Tailwind bg/text classes */
+  --tw-bg-opacity: 1 !important;
+  --tw-text-opacity: 1 !important;
+  
+  /* Make slate backgrounds pure black and text pure white for highest contrast */
+  .bg-slate-800, .bg-slate-900, .bg-blue-900, .bg-blue-800 {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+  }
+  
+  /* Make slate/blue 50-200 pure white with black text */
+  .bg-slate-50, .bg-slate-100, .bg-slate-200, .bg-emerald-50, .bg-blue-50 {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+  
+  .text-slate-500, .text-slate-600, .text-slate-700, .text-emerald-700, .text-emerald-800 {
+    color: #000000 !important;
+  }
+  
+  .border-slate-200, .border-slate-300 {
+    border-color: #000000 !important;
+  }
+}
+
+.reduce-motion * {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+
+/* Skip to content link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #000000;
+  color: white;
+  padding: 8px;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Hide all scrollbars globally */
+::-webkit-scrollbar {
+  display: none;
+}
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
