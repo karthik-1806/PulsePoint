@@ -1,20 +1,21 @@
 # Triggering uvicorn reload
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect, Request
-from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, Field
 import asyncio
 from contextlib import asynccontextmanager
-from state import venue_state
-from seed import generate_mock_venue_snapshot
-from simulator import run_simulator
-from agent import setup_gemini, get_fan_agent_response
+
 from dotenv import load_dotenv
+from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel, Field
 from slowapi import Limiter, _rate_limit_exceeded_handler
-from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 from slowapi.middleware import SlowAPIMiddleware
+from slowapi.util import get_remote_address
 from starlette.middleware.base import BaseHTTPMiddleware
-from starlette.responses import Response
+
+from agent import get_fan_agent_response, setup_gemini
+from seed import generate_mock_venue_snapshot
+from simulator import run_simulator
+from state import venue_state
 
 load_dotenv(override=True)
 
@@ -106,11 +107,11 @@ async def websocket_endpoint(websocket: WebSocket):
 
 # --- Ops Copilot Endpoints ---
 
-from auth import create_access_token, require_role
-from pydantic import Field
 import re
-from ops_agent import classify_incident, generate_daily_briefing
+
+from auth import create_access_token, require_role
 from matching import find_best_volunteer
+from ops_agent import classify_incident, generate_daily_briefing
 
 
 class LoginRequest(BaseModel):
@@ -158,8 +159,8 @@ def report_incident(
     return {"classification": classification, "assigned_volunteer": volunteer_match}
 
 
-import time
 import json
+import time
 
 briefing_cache = {"data": None, "timestamp": 0}
 
@@ -192,7 +193,6 @@ def get_daily_briefing(user: dict = Depends(require_role(["commander", "marshal"
 
 from forecast import calculate_gate_forecasts
 from ops_agent import generate_forecast_recommendations
-import json
 
 
 @app.get("/forecast")

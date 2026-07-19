@@ -1,8 +1,10 @@
 import asyncio
-from fastapi import WebSocket
-from typing import List
-from collections import deque
 import copy
+from collections import deque
+from typing import List
+
+from fastapi import WebSocket
+
 from models import VenueSnapshot
 
 

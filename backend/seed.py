@@ -1,16 +1,17 @@
-from datetime import datetime, timedelta
 import random
+from datetime import datetime, timedelta
+
 from models import (
+    FixtureSchedule,
     Gate,
     GateStatus,
-    Zone,
     Sensor,
     TransitLine,
-    WeatherSnapshot,
+    VenueSnapshot,
     Volunteer,
     VolunteerRoster,
-    FixtureSchedule,
-    VenueSnapshot,
+    WeatherSnapshot,
+    Zone,
 )
 
 

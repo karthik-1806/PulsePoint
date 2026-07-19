@@ -1,7 +1,9 @@
-import pytest
-from ops_agent import classify_incident
 import json
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock, patch
+
+import pytest
+
+from ops_agent import classify_incident
 
 
 @pytest.mark.asyncio

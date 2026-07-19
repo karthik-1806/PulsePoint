@@ -1,4 +1,3 @@
-import pytest
 from simulator import bounded_random_walk
 
 

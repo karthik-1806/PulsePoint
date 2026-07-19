@@ -1,6 +1,7 @@
 import math
 from typing import Optional
-from models import Volunteer, VolunteerRoster
+
+from models import VolunteerRoster
 
 # Simple Euclidean coordinates mapping for Lumen Field zones/gates
 LOCATION_COORDS = {

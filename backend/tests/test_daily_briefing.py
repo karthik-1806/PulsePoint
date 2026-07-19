@@ -1,7 +1,7 @@
-import pytest
 import json
-from unittest.mock import patch, MagicMock
-from ops_agent import generate_daily_briefing, DailyBriefingResponse
+from unittest.mock import MagicMock, patch
+
+from ops_agent import generate_daily_briefing
 
 MOCK_VENUE_DATA = json.dumps(
     {

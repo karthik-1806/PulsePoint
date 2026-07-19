@@ -1,5 +1,6 @@
-import os
 import json
+import os
+
 import google.generativeai as genai
 
 
@@ -50,8 +51,9 @@ def classify_incident(description: str, location: str) -> dict:
 
 import logging
 from datetime import datetime
+from typing import List, Literal
+
 from pydantic import BaseModel, Field, ValidationError
-from typing import Literal, List
 
 logger = logging.getLogger(__name__)
 

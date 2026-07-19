@@ -1,9 +1,10 @@
-import jwt
 import os
 from datetime import datetime, timedelta
-from fastapi import HTTPException, Security
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from typing import Optional
+
+import jwt
+from fastapi import HTTPException, Security
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
 # Mock secret for demo (loaded from env in prod)
 JWT_SECRET = os.getenv("JWT_SECRET", "mock_secret_key_for_demo")

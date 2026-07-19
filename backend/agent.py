@@ -1,7 +1,9 @@
+import logging
 import os
 import sys
-import logging
+
 import google.generativeai as genai
+
 from fan_tools import find_route, nearest_amenity, transit_options, translate_response
 
 logger = logging.getLogger(__name__)

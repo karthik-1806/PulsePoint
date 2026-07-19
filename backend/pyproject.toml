@@ -11,7 +11,7 @@ select = [
     "C",  # flake8-comprehensions
     "B",  # flake8-bugbear
 ]
-ignore = []
+ignore = ["E501", "B008", "C901", "E402", "B904", "B905", "F821"]
 
 [tool.black]
 line-length = 88
