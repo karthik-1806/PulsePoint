@@ -31,7 +31,7 @@ def test_ops_agent_incident_unauthenticated():
     response = client.post(
         "/ops-agent/incident", json={"description": "Test", "location": "ZONE_01"}
     )
-    assert response.status_code == 401
+    assert response.status_code == 403
 
 
 def test_ops_agent_incident_authenticated():
