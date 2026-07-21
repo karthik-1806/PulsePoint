@@ -4,6 +4,9 @@ test('Fan Agent step-free route request in Spanish', async ({ page }) => {
   // Go to the frontend app
   await page.goto('http://localhost:3000');
 
+  // Click Continue as Fan
+  await page.getByRole('button', { name: 'Continue as Fan' }).click();
+
   // Verify the widget is loaded
   await expect(page.getByRole('heading', { name: 'PulsePoint Fan Agent' })).toBeVisible();
 
@@ -11,7 +14,7 @@ test('Fan Agent step-free route request in Spanish', async ({ page }) => {
   await page.getByRole('combobox', { name: 'Select Language' }).selectOption('Spanish');
 
   // Enable Step-Free Route
-  await page.getByLabel('Toggle Step-Free Route').check();
+  await page.getByRole('checkbox', { name: 'Toggle Step-Free Route' }).check();
 
   // Type a request for a route
   const input = page.getByRole('textbox', { name: 'Text input for Fan Agent' });

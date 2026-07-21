@@ -10,6 +10,9 @@ test.describe('PulsePoint E2E and Accessibility Tests', () => {
     const accessibilityScanResults = await new AxeBuilder({ page }).analyze();
     expect(accessibilityScanResults.violations).toEqual([]);
 
+    // Go to dashboard as Fan
+    await page.getByRole('button', { name: 'Continue as Fan' }).click();
+
     // Select Spanish
     await page.selectOption('select', 'Spanish');
     
@@ -24,9 +27,7 @@ test.describe('PulsePoint E2E and Accessibility Tests', () => {
     // Submit
     await page.getByRole('button', { name: 'Send' }).click();
 
-    // Assert agent response appears (mocked backend won't actually hit gemini without key, 
-    // but the error message or fallback text will show up, proving the flow worked).
-    // The chat box should contain a new message bubble.
+    // Assert agent response appears
     await expect(page.locator('.bg-slate-50').last()).toBeVisible();
   });
 
@@ -34,7 +35,7 @@ test.describe('PulsePoint E2E and Accessibility Tests', () => {
     await page.goto('/');
     
     // Login as Commander
-    await page.getByRole('button', { name: 'Commander' }).click();
+    await page.getByRole('button', { name: 'Organizers' }).click();
     
     // Verify Dashboard loads
     await expect(page.getByRole('heading', { name: 'Commander Dashboard' })).toBeVisible();
