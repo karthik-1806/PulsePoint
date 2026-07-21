@@ -43,6 +43,7 @@ export default function VenueMap({ route = [] }: VenueMapProps) {
             strokeLinecap="round"
             strokeLinejoin="round"
             className="animate-pulse"
+            data-testid="route-path"
           />
         )}
         

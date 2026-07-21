@@ -57,6 +57,7 @@ jobs:
       env:
         GEMINI_API_KEY: mock_key_for_testing
         JWT_SECRET: mock_jwt_secret
+        NEXT_PUBLIC_API_URL: http://127.0.0.1:8000
       run: |
         # Start backend in background
         cd ../backend

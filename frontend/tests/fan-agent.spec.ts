@@ -36,7 +36,7 @@ test('Fan Agent step-free route request in Spanish', async ({ page }) => {
   expect(text).not.toBeNull();
   
   // Verify the SVG map is rendering a route (path should be visible)
-  const svgPath = page.locator('svg path');
+  const svgPath = page.getByTestId('route-path');
   await expect(svgPath).toBeVisible();
   
   // Verify the step-free path badge is shown

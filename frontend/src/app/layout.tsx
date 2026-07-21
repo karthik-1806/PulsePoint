@@ -30,7 +30,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <a href="#main-content" className="skip-link focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-600">Skip to content</a>
+        <header>
+          <a href="#main-content" className="skip-link focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-600">Skip to content</a>
+        </header>
         <AccessibilityProvider>
           {children}
         </AccessibilityProvider>
