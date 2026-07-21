@@ -23,16 +23,16 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
 
 def get_current_user(credentials: HTTPAuthorizationCredentials = Security(security)):
     if not credentials:
-        raise HTTPException(status_code=403, detail="Not authenticated")
+        raise HTTPException(status_code=401, detail="Not authenticated")
     token = credentials.credentials
     try:
         payload = jwt.decode(token, JWT_SECRET, algorithms=[ALGORITHM])
         role: str = payload.get("role")
         if role is None:
-            raise HTTPException(status_code=403, detail="Invalid token payload")
+            raise HTTPException(status_code=401, detail="Invalid token payload")
         return payload
     except jwt.PyJWTError:
-        raise HTTPException(status_code=403, detail="Could not validate credentials")
+        raise HTTPException(status_code=401, detail="Could not validate credentials")
 
 
 def require_role(allowed_roles: list[str]):
